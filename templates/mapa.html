@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Mapa | Turismo AI Colombia{% endblock %}
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <span class="eyebrow">Mapa inteligente</span>
+        <h1>Colombia por nivel de saturacion</h1>
+        <p>Verde: baja, amarillo: media, rojo: alta. Cada marcador contiene prediccion y recomendacion.</p>
+    </div>
+</section>
+
+<section class="section-block pt-0">
+    <div class="container">
+        <div id="map" class="map-shell" data-aos="zoom-in"></div>
+    </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/mapa.js') }}"></script>
+{% endblock %}

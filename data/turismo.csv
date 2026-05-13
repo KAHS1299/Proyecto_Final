@@ -1,0 +1,19 @@
+pueblo,lat,lng,temporada,festivo,clima,turistas_historicos,movilidad,eventos,mes,ocupacion,nivel_saturacion,turistas_estimados,recomendacion
+Villa de Leyva,5.6341,-73.5244,Alta,Si,Templado,6800,Alta,3,7,91,Alta,8200,Reservar con anticipacion y visitar museos temprano.
+Villa de Leyva,5.6341,-73.5244,Media,No,Templado,3900,Media,1,10,57,Media,4300,Viajar entre semana mejora la experiencia.
+Barichara,6.6357,-73.2228,Baja,No,Calido,1400,Baja,0,2,28,Baja,1600,Excelente para turismo tranquilo.
+Barichara,6.6357,-73.2228,Alta,Si,Calido,4700,Alta,2,12,84,Alta,5900,Evitar puentes festivos si se busca baja congestion.
+Salento,4.6364,-75.5703,Alta,Si,Templado,7200,Alta,3,1,93,Alta,8800,Comprar entradas y transporte con anticipacion.
+Salento,4.6364,-75.5703,Media,No,Lluvioso,3600,Media,1,5,61,Media,4100,Usar horarios de la manana para evitar filas.
+Mompox,9.2419,-74.4267,Alta,Si,Calido,5100,Alta,3,4,88,Alta,6400,Planear alojamiento fuera del centro historico.
+Mompox,9.2419,-74.4267,Baja,No,Calido,1300,Baja,0,9,24,Baja,1500,Ideal para recorridos patrimoniales lentos.
+Guaduas,5.0669,-74.5944,Media,Si,Templado,3100,Media,1,6,55,Media,3700,Reservar restaurantes en fines de semana.
+Guaduas,5.0669,-74.5944,Baja,No,Templado,1200,Baja,0,3,22,Baja,1500,Buena opcion para escapada corta.
+Santa Fe de Antioquia,6.5569,-75.8281,Alta,Si,Calido,6200,Alta,2,8,89,Alta,7600,Evitar horas pico en accesos viales.
+Santa Fe de Antioquia,6.5569,-75.8281,Media,No,Calido,2900,Media,1,11,52,Media,3400,Recomendado para viaje familiar.
+Jardin,5.5990,-75.8198,Alta,Si,Templado,5600,Alta,2,7,86,Alta,6900,Comprar pasajes con anticipacion.
+Jardin,5.5990,-75.8198,Baja,No,Templado,1800,Baja,0,2,31,Baja,2100,Buen mes para naturaleza y cafe.
+Honda,5.2086,-74.7358,Media,Si,Calido,3300,Media,1,6,58,Media,3900,Priorizar recorridos temprano por el calor.
+Honda,5.2086,-74.7358,Baja,No,Calido,1100,Baja,0,9,21,Baja,1400,Alta disponibilidad hotelera.
+Jerico,5.7920,-75.7860,Media,No,Templado,2600,Media,1,5,49,Media,3200,Buena fecha para turismo cultural.
+Jerico,5.7920,-75.7860,Alta,Si,Templado,4800,Alta,2,12,82,Alta,6100,Reservar hospedaje con margen.
