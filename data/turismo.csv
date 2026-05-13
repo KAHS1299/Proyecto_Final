@@ -1,19 +1,25 @@
 pueblo,lat,lng,temporada,festivo,clima,turistas_historicos,movilidad,eventos,mes,ocupacion,nivel_saturacion,turistas_estimados,recomendacion
-Villa de Leyva,5.6341,-73.5244,Alta,Si,Templado,6800,Alta,3,7,91,Alta,8200,Reservar con anticipacion y visitar museos temprano.
-Villa de Leyva,5.6341,-73.5244,Media,No,Templado,3900,Media,1,10,57,Media,4300,Viajar entre semana mejora la experiencia.
-Barichara,6.6357,-73.2228,Baja,No,Calido,1400,Baja,0,2,28,Baja,1600,Excelente para turismo tranquilo.
-Barichara,6.6357,-73.2228,Alta,Si,Calido,4700,Alta,2,12,84,Alta,5900,Evitar puentes festivos si se busca baja congestion.
-Salento,4.6364,-75.5703,Alta,Si,Templado,7200,Alta,3,1,93,Alta,8800,Comprar entradas y transporte con anticipacion.
-Salento,4.6364,-75.5703,Media,No,Lluvioso,3600,Media,1,5,61,Media,4100,Usar horarios de la manana para evitar filas.
-Mompox,9.2419,-74.4267,Alta,Si,Calido,5100,Alta,3,4,88,Alta,6400,Planear alojamiento fuera del centro historico.
-Mompox,9.2419,-74.4267,Baja,No,Calido,1300,Baja,0,9,24,Baja,1500,Ideal para recorridos patrimoniales lentos.
-Guaduas,5.0669,-74.5944,Media,Si,Templado,3100,Media,1,6,55,Media,3700,Reservar restaurantes en fines de semana.
-Guaduas,5.0669,-74.5944,Baja,No,Templado,1200,Baja,0,3,22,Baja,1500,Buena opcion para escapada corta.
-Santa Fe de Antioquia,6.5569,-75.8281,Alta,Si,Calido,6200,Alta,2,8,89,Alta,7600,Evitar horas pico en accesos viales.
-Santa Fe de Antioquia,6.5569,-75.8281,Media,No,Calido,2900,Media,1,11,52,Media,3400,Recomendado para viaje familiar.
-Jardin,5.5990,-75.8198,Alta,Si,Templado,5600,Alta,2,7,86,Alta,6900,Comprar pasajes con anticipacion.
-Jardin,5.5990,-75.8198,Baja,No,Templado,1800,Baja,0,2,31,Baja,2100,Buen mes para naturaleza y cafe.
-Honda,5.2086,-74.7358,Media,Si,Calido,3300,Media,1,6,58,Media,3900,Priorizar recorridos temprano por el calor.
-Honda,5.2086,-74.7358,Baja,No,Calido,1100,Baja,0,9,21,Baja,1400,Alta disponibilidad hotelera.
-Jerico,5.7920,-75.7860,Media,No,Templado,2600,Media,1,5,49,Media,3200,Buena fecha para turismo cultural.
-Jerico,5.7920,-75.7860,Alta,Si,Templado,4800,Alta,2,12,82,Alta,6100,Reservar hospedaje con margen.
+Villa de Leyva,5.6341,-73.5244,Alta,Si,Templado,9200,Alta,4,7,94,Alta,10800,Reservar hospedaje y visitar la plaza temprano.
+Villa de Leyva,5.6341,-73.5244,Media,No,Templado,4700,Media,1,10,58,Media,5200,Viajar entre semana mejora la experiencia.
+Barichara,6.6357,-73.2228,Alta,Si,Calido,7200,Alta,3,12,89,Alta,8500,Evitar puentes festivos si se busca tranquilidad.
+Barichara,6.6357,-73.2228,Baja,No,Calido,2300,Baja,0,2,30,Baja,2700,Excelente para caminar y visitar Guane sin filas.
+Salento,4.6364,-75.5703,Alta,Si,Templado,11200,Alta,4,1,96,Alta,12900,Comprar transporte al Valle de Cocora con anticipacion.
+Salento,4.6364,-75.5703,Media,No,Lluvioso,5400,Media,1,5,63,Media,6100,Usar horarios de la manana para evitar filas.
+Guatape,6.2327,-75.1586,Alta,Si,Templado,11800,Alta,4,8,97,Alta,13600,Subir temprano a la Piedra del Penol y reservar lancha.
+Guatape,6.2327,-75.1586,Media,No,Templado,6200,Media,2,4,66,Media,7000,Ideal evitar domingos por alta movilidad desde Medellin.
+Jardin,5.5990,-75.8198,Alta,Si,Templado,7800,Alta,3,7,88,Alta,9300,Reservar tours de naturaleza y cafe con anticipacion.
+Jardin,5.5990,-75.8198,Baja,No,Templado,2900,Baja,0,2,34,Baja,3300,Buen mes para naturaleza y caminatas cafeteras.
+Filandia,4.6747,-75.6583,Alta,Si,Templado,7600,Alta,3,1,87,Alta,8900,Llegar temprano al mirador y reservar restaurantes.
+Filandia,4.6747,-75.6583,Media,No,Lluvioso,3800,Media,1,5,52,Media,4300,Buen destino alternativo para descongestionar Salento.
+Santa Cruz de Mompox,9.2419,-74.4267,Alta,Si,Calido,6900,Alta,3,4,90,Alta,8200,Planear alojamiento cerca del centro historico.
+Santa Cruz de Mompox,9.2419,-74.4267,Baja,No,Calido,2100,Baja,0,9,27,Baja,2500,Ideal para recorridos patrimoniales tranquilos.
+Santa Fe de Antioquia,6.5569,-75.8281,Alta,Si,Calido,8400,Alta,3,8,91,Alta,9900,Evitar horas pico en accesos viales.
+Santa Fe de Antioquia,6.5569,-75.8281,Media,No,Calido,4300,Media,1,11,55,Media,4900,Recomendado para viaje familiar fuera de puente.
+Jerico,5.7920,-75.7860,Alta,Si,Templado,6100,Alta,2,12,82,Alta,7400,Reservar hospedaje con margen y recorrer temprano.
+Jerico,5.7920,-75.7860,Media,No,Templado,3200,Media,1,5,48,Media,3700,Buena fecha para turismo cultural y religioso.
+Mongui,5.7211,-72.8491,Alta,Si,Frio,5400,Alta,2,1,80,Alta,6500,Llevar abrigo y planear caminatas al paramo con guia.
+Mongui,5.7211,-72.8491,Baja,No,Frio,1900,Baja,0,9,26,Baja,2300,Excelente para arquitectura colonial y descanso.
+Salamina,5.4073,-75.4875,Media,Si,Templado,3600,Media,1,6,57,Media,4200,Reservar transporte local para ver arquitectura cafetera.
+Salamina,5.4073,-75.4875,Baja,No,Templado,1700,Baja,0,3,24,Baja,2100,Buena opcion para turismo cafetero tranquilo.
+Honda,5.2086,-74.7358,Media,Si,Calido,3900,Media,1,6,59,Media,4500,Priorizar recorridos temprano por el calor.
+Honda,5.2086,-74.7358,Baja,No,Calido,1600,Baja,0,9,23,Baja,1900,Alta disponibilidad hotelera y menos filas.

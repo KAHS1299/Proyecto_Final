@@ -13,7 +13,7 @@ fetch("/api/dashboard")
                     data: data.turistas,
                     borderWidth: 0,
                     borderRadius: 6,
-                    backgroundColor: "rgba(22,184,255,0.72)"
+                    backgroundColor: "rgba(33,199,183,0.72)"
                 }]
             },
             options: {
@@ -31,7 +31,7 @@ fetch("/api/dashboard")
                 labels: ["Baja", "Media", "Alta"],
                 datasets: [{
                     data: data.niveles,
-                    backgroundColor: ["#31d67b", "#f6c945", "#ff5a73"],
+                    backgroundColor: ["#32c977", "#f2bd3d", "#ef4f5f"],
                     borderColor: "#0c1224"
                 }]
             },
@@ -47,8 +47,8 @@ fetch("/api/dashboard")
                 datasets: [{
                     label: "Turistas por mes",
                     data: data.mensual,
-                    borderColor: "#ff4fd8",
-                    backgroundColor: "rgba(255,79,216,0.16)",
+                    borderColor: "#ff7468",
+                    backgroundColor: "rgba(255,116,104,0.16)",
                     fill: true,
                     tension: 0.36
                 }]

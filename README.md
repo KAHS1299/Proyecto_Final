@@ -9,6 +9,7 @@ Aplicacion web en Flask para predecir saturacion turistica en pueblos patrimonio
 - Mapa interactivo con Leaflet.
 - Simulador de prediccion con Machine Learning.
 - Modelo Random Forest para clasificacion y regresion.
+- Dataset simulado con destinos reconocidos: Salento, Guatape, Villa de Leyva, Barichara, Jardin, Filandia, Mompox, Jerico, Mongui, Salamina, Honda y Santa Fe de Antioquia.
 
 ## Ejecutar en Visual Studio Code
 

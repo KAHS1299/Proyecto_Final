@@ -6,9 +6,9 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 const colors = {
-    Baja: "#31d67b",
-    Media: "#f6c945",
-    Alta: "#ff5a73"
+    Baja: "#32c977",
+    Media: "#f2bd3d",
+    Alta: "#ef4f5f"
 };
 
 fetch("/api/mapa")
