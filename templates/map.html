@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Map | AI Tourism Colombia{% endblock %}
+{% block content %}
+<section class="page-header map-header">
+    <div class="container">
+        <span class="eyebrow">Smart Map</span>
+        <h1>Select a town and review its tourist context</h1>
+        <p>Markers show the current saturation level. Choosing a destination will reveal data, recommendations, and local imagery.</p>
+    </div>
+</section>
+
+<section class="section-block pt-0 map-section">
+    <div class="container">
+        <div class="map-layout" data-aos="fade-up">
+            <div id="map" class="map-shell"></div>
+
+            <aside class="place-panel" id="placePanel" aria-live="polite">
+                <span class="eyebrow">Selected Destination</span>
+                <h2 id="placeName">Choose a marker</h2>
+                <p id="placeDescription">Click on a town on the map to see tourist photos, estimated occupancy, and travel recommendations.</p>
+                
+                <div class="place-detail" id="placeDetail">Select a town to discover its main attractions.</div>
+                
+                <div class="place-facts">
+                    <div><span>Saturation</span><strong id="placeLevel">--</strong></div>
+                    <div><span>Tourists</span><strong id="placeVisitors">--</strong></div>
+                    <div><span>Occupancy</span><strong id="placeOccupancy">--</strong></div>
+                </div>
+                
+                <p class="place-recommendation" id="placeRecommendation">Select a destination to load recommendations.</p>
+                
+                <div class="place-gallery" id="placeGallery">
+                    </div>
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+{% endblock %}

@@ -42,19 +42,17 @@ a {
 }
 
 .hero {
-    position: relative;
-    overflow: hidden;
+    min-height: 760px;
     background:
-        linear-gradient(90deg, rgba(3, 9, 17, 0.91), rgba(6, 35, 42, 0.48)),
-        url("https://images.unsplash.com/photo-1595799628992-2ac92a3f1542?auto=format&fit=crop&w=1800&q=80") center/cover;
+        /* Cambiamos 0.94 por 0.6 y 0.72 por 0.3 */
+        linear-gradient(90deg, rgba(3, 8, 13, 0.75), rgba(4, 24, 25, 0.4) 48%, rgba(4, 16, 21, 0.2)),
+        url("https://commons.wikimedia.org/wiki/Special:FilePath/Plaza_Mayor_-_Villa_de_Leyva%2C_Boyac%C3%A1%2C_Colombia.jpg?width=1800") center/cover;
 }
 
+/* También suavizamos la sombra inferior que se funde con el fondo */
 .hero-overlay {
-    position: absolute;
-    inset: 0;
     background:
-        radial-gradient(circle at 78% 20%, rgba(33, 199, 183, 0.2), transparent 30%),
-        linear-gradient(180deg, transparent 70%, var(--bg));
+        linear-gradient(180deg, rgba(3, 8, 13, 0.05) 0%, rgba(7, 16, 24, 0.1) 58%, var(--bg) 100%);
 }
 
 .eyebrow {
@@ -93,34 +91,41 @@ a {
 .panel,
 .result-panel,
 .feature-grid > div {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    backdrop-filter: blur(14px);
-    box-shadow: 0 20px 54px rgba(0, 0, 0, 0.22);
+    /* Eliminamos el background de aquí para que no se oscurezca doble */
+    border: 1px solid rgba(255, 255, 255, 0.25); /* Borde más claro y brillante */
+    border-radius: 12px; /* Esquinas más suaves y modernas */
+    backdrop-filter: blur(20px); /* Aumentamos el desenfoque para que resalte sobre la foto */
+    box-shadow: 0 20px 54px rgba(0, 0, 0, 0.15); /* Sombra más sutil */
 }
 
 .metric-card {
     min-height: 150px;
     padding: 28px;
+    background: var(--panel); /* El fondo se aplica solo aquí */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .metric-card span,
 .feature-grid span {
     color: var(--muted);
     display: block;
+    font-weight: 500;
 }
 
 .metric-card strong {
     font-size: clamp(1.9rem, 4.2vw, 3.1rem);
     line-height: 1;
+    color: #ffffff; /* Blanco puro para máxima legibilidad */
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3); /* Sombra para que el número "flote" */
 }
 
 .metric-card small {
     font-size: 2rem;
     color: var(--teal);
+    font-weight: 700;
 }
-
 .section-block {
     padding: 82px 0;
 }
@@ -281,7 +286,8 @@ footer {
 /* Visual refresh: home and interactive map */
 body {
     background:
-        linear-gradient(140deg, rgba(5, 13, 19, 0.98), rgba(12, 26, 31, 0.96) 44%, rgba(21, 18, 30, 0.95)),
+        /* Tonos ligeramente más claros y azulados */
+        linear-gradient(140deg, rgba(10, 25, 41, 0.98), rgba(18, 40, 50, 0.96) 44%, rgba(30, 25, 45, 0.95)),
         var(--bg);
 }
 
@@ -493,10 +499,9 @@ body {
 }
 
 .place-facts div {
-    padding: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.13);
-    border-radius: 8px;
-    background: rgba(4, 9, 16, 0.34);
+    /* Un azul muy sutil para que no sea solo negro transparente */
+    background: rgba(26, 167, 236, 0.15); 
+    border: 1px solid rgba(157, 242, 233, 0.3);
 }
 
 .place-facts strong {

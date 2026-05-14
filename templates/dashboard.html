@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Dashboard | Turismo AI Colombia{% endblock %}
+{% block title %}Dashboard | AI Tourism Colombia{% endblock %}
 {% block content %}
 <section class="page-header">
     <div class="container">
-        <span class="eyebrow">Analitica inteligente</span>
-        <h1>Dashboard de saturacion turistica</h1>
-        <p>Graficas interactivas para comparar pueblos, meses y niveles de ocupacion.</p>
+        <span class="eyebrow">Intelligent Analytics</span>
+        <h1>Tourist Saturation</h1>
+        <p>Interactive charts to compare towns, months, and occupancy levels.</p>
     </div>
 </section>
 
@@ -14,19 +14,21 @@
         <div class="row g-4">
             <div class="col-lg-8" data-aos="fade-up">
                 <div class="panel">
-                    <h2>Turistas estimados por pueblo</h2>
+                    <h2>Estimated Average Tourists per Town</h2>
                     <canvas id="barChart" height="120"></canvas>
                 </div>
             </div>
+
             <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="panel">
-                    <h2>Niveles de saturacion</h2>
+                    <h2>Saturation Level Distribution</h2>
                     <canvas id="donutChart" height="220"></canvas>
                 </div>
             </div>
+
             <div class="col-12" data-aos="fade-up">
                 <div class="panel">
-                    <h2>Prediccion mensual agregada</h2>
+                    <h2>Monthly Aggregate Forecast</h2>
                     <canvas id="lineChart" height="90"></canvas>
                 </div>
             </div>
@@ -34,6 +36,7 @@
     </div>
 </section>
 {% endblock %}
+
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endblock %}

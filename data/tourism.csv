@@ -1,0 +1,25 @@
+town,lat,lon,season,holiday,weather,mobility,events,month,historical_tourists,occupancy,saturation_level,estimated_tourists,recommendation
+Villa de Leyva,5.6341,-73.5244,High,Yes,Mild,High,4,7,9200,94,High,10800,Book accommodation and visit the main square early.
+Villa de Leyva,5.6341,-73.5244,Medium,No,Mild,Medium,1,10,4700,58,Medium,5200,Traveling during the week improves the experience.
+Barichara,6.6357,-73.2228,High,Yes,Hot,High,3,12,7200,89,High,8500,Avoid holiday weekends if seeking tranquility.
+Barichara,6.6357,-73.2228,Low,No,Hot,Low,0,2,2300,30,Low,2700,Excellent for walking and visiting Guane without lines.
+Salento,4.6364,-75.5703,High,Yes,Mild,High,4,1,11200,96,High,12900,Purchase transport to the Cocora Valley in advance.
+Salento,4.6364,-75.5703,Medium,No,Rainy,Medium,1,5,5400,63,Medium,6100,Use morning hours to avoid lines.
+Guatape,6.2327,-75.1586,High,Yes,Mild,High,4,8,11800,97,High,13600,Go up El Peñol Rock early and book a boat.
+Guatape,6.2327,-75.1586,Medium,No,Mild,Medium,2,4,6200,66,Medium,7000,Ideal to avoid Sundays due to high mobility from Medellin.
+Jardin,5.5990,-75.8198,High,Yes,Mild,High,3,7,7800,88,High,9300,Book nature and coffee tours in advance.
+Jardin,5.5990,-75.8198,Low,No,Mild,Low,0,2,2900,34,Low,3300,Good month for nature and coffee region hikes.
+Filandia,4.6747,-75.6583,High,Yes,Mild,High,3,1,7600,87,High,8900,Arrive early at the viewpoint and book restaurants.
+Filandia,4.6747,-75.6583,Medium,No,Rainy,Medium,1,5,3800,52,Medium,4300,Good alternative destination to decompress Salento.
+Santa Cruz de Mompox,9.2419,-74.4267,High,Yes,Hot,High,3,4,6900,90,High,8200,Plan accommodation near the historic center.
+Santa Cruz de Mompox,9.2419,-74.4267,Low,No,Hot,Low,0,9,2100,27,Low,2500,Ideal for quiet heritage tours.
+Santa Fe de Antioquia,6.5569,-75.8281,High,Yes,Hot,High,3,8,8400,91,High,9900,Avoid peak hours on road accesses.
+Santa Fe de Antioquia,6.5569,-75.8281,Medium,No,Hot,Medium,1,11,4300,55,Medium,4900,Recommended for family trips outside holiday weekends.
+Jerico,5.7920,-75.7860,High,Yes,Mild,High,2,12,6100,82,High,7400,Book accommodation in advance and tour early.
+Jerico,5.7920,-75.7860,Medium,No,Mild,Medium,1,5,3200,48,Medium,3700,Good date for cultural and religious tourism.
+Mongui,5.7211,-72.8491,High,Yes,Cold,High,2,1,5400,80,High,6500,Bring warm clothes and plan guided paramo hikes.
+Mongui,5.7211,-72.8491,Low,No,Cold,Low,0,9,1900,26,Low,2300,Excellent for colonial architecture and rest.
+Salamina,5.4073,-75.4875,Medium,Yes,Mild,Medium,1,6,3600,57,Medium,4200,Book local transport to see coffee architecture.
+Salamina,5.4073,-75.4875,Low,No,Mild,Low,0,3,1700,24,Low,2100,Good option for quiet coffee tourism.
+Honda,5.2086,-74.7358,Medium,Yes,Hot,Medium,1,6,3900,59,Medium,4500,Prioritize early tours because of the heat.
+Honda,5.2086,-74.7358,Low,No,Hot,Low,0,9,1600,23,Low,1900,High hotel availability and fewer lines.

@@ -4,16 +4,16 @@ fetch("/api/dashboard")
         const grid = "rgba(255,255,255,0.11)";
         const text = "#dbeafe";
 
+        // Bar Chart
         new Chart(document.getElementById("barChart"), {
             type: "bar",
             data: {
-                labels: data.pueblos,
+                labels: data.towns,
                 datasets: [{
-                    label: "Turistas",
-                    data: data.turistas,
-                    borderWidth: 0,
-                    borderRadius: 6,
-                    backgroundColor: "rgba(33,199,183,0.72)"
+                    label: "Tourists",
+                    data: data.tourists,
+                    backgroundColor: "rgba(33,199,183,0.72)",
+                    borderRadius: 6
                 }]
             },
             options: {
@@ -25,12 +25,13 @@ fetch("/api/dashboard")
             }
         });
 
+        // Donut Chart
         new Chart(document.getElementById("donutChart"), {
             type: "doughnut",
             data: {
-                labels: ["Baja", "Media", "Alta"],
+                labels: ["Low", "Medium", "High"],
                 datasets: [{
-                    data: data.niveles,
+                    data: data.levels,
                     backgroundColor: ["#32c977", "#f2bd3d", "#ef4f5f"],
                     borderColor: "#0c1224"
                 }]
@@ -40,17 +41,17 @@ fetch("/api/dashboard")
             }
         });
 
+        // Line Chart
         new Chart(document.getElementById("lineChart"), {
             type: "line",
             data: {
-                labels: data.meses.map((month) => `Mes ${month}`),
+                labels: data.months.map(m => `Month ${m}`),
                 datasets: [{
-                    label: "Turistas por mes",
-                    data: data.mensual,
+                    label: "Monthly Flow",
+                    data: data.monthly,
                     borderColor: "#ff7468",
-                    backgroundColor: "rgba(255,116,104,0.16)",
                     fill: true,
-                    tension: 0.36
+                    tension: 0.3
                 }]
             },
             options: {
