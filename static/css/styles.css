@@ -277,3 +277,377 @@ footer {
         padding: 64px 0;
     }
 }
+
+/* Visual refresh: home and interactive map */
+body {
+    background:
+        linear-gradient(140deg, rgba(5, 13, 19, 0.98), rgba(12, 26, 31, 0.96) 44%, rgba(21, 18, 30, 0.95)),
+        var(--bg);
+}
+
+.nav-glass .navbar-brand::after {
+    content: "Colombia";
+    margin-left: 10px;
+    padding: 4px 8px;
+    border: 1px solid rgba(157, 242, 233, 0.28);
+    border-radius: 999px;
+    color: #9df2e9;
+    font-size: 0.68rem;
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+.hero {
+    min-height: 760px;
+    background:
+        linear-gradient(90deg, rgba(3, 8, 13, 0.94), rgba(4, 24, 25, 0.72) 48%, rgba(4, 16, 21, 0.34)),
+        url("https://commons.wikimedia.org/wiki/Special:FilePath/Plaza_Mayor_-_Villa_de_Leyva%2C_Boyac%C3%A1%2C_Colombia.jpg?width=1800") center/cover;
+}
+
+.hero-overlay {
+    background:
+        linear-gradient(180deg, rgba(3, 8, 13, 0.1) 0%, rgba(7, 16, 24, 0.18) 58%, var(--bg) 100%);
+}
+
+.hero-copy {
+    max-width: 760px;
+    color: rgba(239, 247, 255, 0.84);
+}
+
+.hero-insight {
+    padding: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 8px;
+    background: rgba(5, 10, 17, 0.54);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+}
+
+.hero-insight span,
+.place-facts span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.hero-insight strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.35rem;
+    line-height: 1.25;
+}
+
+.insight-scale {
+    display: grid;
+    grid-template-columns: 0.65fr 0.9fr 1.25fr;
+    gap: 8px;
+    align-items: end;
+    height: 82px;
+    margin-top: 26px;
+}
+
+.insight-scale i {
+    display: block;
+    border-radius: 8px 8px 0 0;
+    background: linear-gradient(180deg, var(--teal), rgba(33, 199, 183, 0.22));
+}
+
+.insight-scale i:nth-child(1) { height: 36%; }
+.insight-scale i:nth-child(2) { height: 62%; background: linear-gradient(180deg, var(--yellow), rgba(242, 189, 61, 0.22)); }
+.insight-scale i:nth-child(3) { height: 100%; background: linear-gradient(180deg, var(--coral), rgba(255, 116, 104, 0.2)); }
+
+.metric-card {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.metric-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: linear-gradient(90deg, var(--teal), var(--blue), var(--coral));
+}
+
+.metric-card-accent {
+    background: rgba(33, 199, 183, 0.14);
+}
+
+.intro-section {
+    padding-top: 34px;
+}
+
+.feature-grid-wide > div {
+    min-height: 132px;
+}
+
+.destination-strip {
+    padding: 78px 0 96px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0));
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.section-heading h2 {
+    max-width: 720px;
+    margin-top: 12px;
+    font-weight: 800;
+    font-size: clamp(1.7rem, 4vw, 3rem);
+}
+
+.destination-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.destination-card {
+    position: relative;
+    min-height: 330px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: #0d1720;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+}
+
+.destination-card img {
+    width: 100%;
+    height: 100%;
+    min-height: 330px;
+    object-fit: cover;
+    filter: saturate(1.04) contrast(1.04);
+}
+
+.destination-card div {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 70px 22px 22px;
+    background: linear-gradient(180deg, transparent, rgba(3, 8, 13, 0.92));
+}
+
+.destination-card strong,
+.destination-card span {
+    display: block;
+}
+
+.destination-card strong {
+    font-size: 1.35rem;
+}
+
+.destination-card span {
+    margin-top: 4px;
+    color: rgba(239, 247, 255, 0.74);
+}
+
+.map-header p {
+    max-width: 760px;
+}
+
+.map-section {
+    margin-top: -16px;
+}
+
+.map-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(340px, 0.8fr);
+    gap: 22px;
+    align-items: stretch;
+}
+
+.map-layout .map-shell {
+    height: min(72vh, 720px);
+    min-height: 560px;
+}
+
+.place-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 560px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.28);
+}
+
+.place-panel h2 {
+    margin: 10px 0 8px;
+    font-size: clamp(1.55rem, 3vw, 2.4rem);
+    font-weight: 800;
+}
+
+.place-panel p {
+    color: var(--muted);
+}
+
+.place-facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin: 14px 0 16px;
+}
+
+.place-facts div {
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 8px;
+    background: rgba(4, 9, 16, 0.34);
+}
+
+.place-facts strong {
+    display: block;
+    margin-top: 6px;
+    font-size: 1.05rem;
+}
+
+.place-recommendation {
+    padding: 14px 16px;
+    border-left: 4px solid var(--teal);
+    background: rgba(33, 199, 183, 0.09);
+    border-radius: 0 8px 8px 0;
+}
+
+.place-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: auto;
+}
+
+.place-gallery figure {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #09111a;
+}
+
+.place-gallery figure:first-child {
+    grid-column: 1 / -1;
+}
+
+.place-gallery img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    display: block;
+}
+
+.leaflet-container {
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.leaflet-popup-content {
+    line-height: 1.45;
+}
+
+@media (max-width: 991px) {
+    .hero {
+        min-height: 720px;
+    }
+
+    .destination-grid,
+    .map-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .map-layout .map-shell,
+    .place-panel {
+        min-height: 480px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero {
+        min-height: 690px;
+    }
+
+    .destination-grid {
+        gap: 14px;
+    }
+
+    .destination-card,
+    .destination-card img {
+        min-height: 280px;
+    }
+
+    .place-facts {
+        grid-template-columns: 1fr;
+    }
+
+    .place-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .map-layout .map-shell,
+    .place-panel {
+        min-height: 430px;
+    }
+}
+
+.gallery-loading {
+    grid-column: 1 / -1;
+    min-height: 170px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(4, 9, 16, 0.24);
+}
+.place-panel {
+    color: #f9fcff;
+}
+
+.place-panel h2,
+.page-header h1,
+.hero-title,
+.section-heading h2 {
+    color: #ffffff;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.34);
+}
+
+.place-panel p,
+.place-detail,
+.place-recommendation,
+.page-header p,
+.hero-copy {
+    color: #e7f0fb;
+}
+
+.place-detail {
+    margin: 12px 0 4px;
+    padding: 16px 18px;
+    border: 1px solid rgba(157, 242, 233, 0.24);
+    border-radius: 8px;
+    background: rgba(10, 27, 32, 0.58);
+    font-weight: 650;
+    line-height: 1.5;
+}
+
+.place-facts div {
+    background: rgba(6, 14, 23, 0.68);
+}
+
+.place-facts span {
+    color: #bfeef0;
+}
+
+.place-facts strong {
+    color: #ffffff;
+}
+
+.place-recommendation {
+    color: #f4fbff;
+    font-weight: 620;
+}
+
+.leaflet-popup-content-wrapper strong,
+.leaflet-popup-content-wrapper b {
+    color: #ffffff;
+}

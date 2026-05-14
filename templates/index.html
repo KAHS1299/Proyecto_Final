@@ -1,19 +1,26 @@
 {% extends "base.html" %}
-{% block title %}Inicio | Turismo AI Colombia{% endblock %}
+{% block title %}Inicio | Turismo Inteligente Colombia{% endblock %}
 {% block content %}
-<section class="hero d-flex align-items-center">
+<section class="hero d-flex align-items-end">
     <div class="hero-overlay"></div>
     <div class="container position-relative">
-        <div class="row align-items-center min-vh-100 pt-5">
-            <div class="col-lg-8" data-aos="fade-up">
-                <span class="eyebrow">Prediccion turistica con IA</span>
-                <h1 class="hero-title fw-bold mt-3">Inteligencia Artificial para predecir el turismo en Colombia</h1>
-                <p class="lead text-light-emphasis mt-4">
-                    Plataforma de analítica turística con Inteligencia Artificial que predice niveles de saturación utilizando datos de movilidad, temporadas vacacionales y comportamiento histórico de visitantes.
+        <div class="row align-items-end min-vh-100 pb-5 pt-5">
+            <div class="col-xl-7 col-lg-8" data-aos="fade-up">
+                <span class="eyebrow">Turismo inteligente para pueblos patrimonio</span>
+                <h1 class="hero-title fw-bold mt-3">Anticipa la ocupacion antes de elegir tu destino.</h1>
+                <p class="lead hero-copy mt-4">
+                    Una plataforma de analitica que cruza temporada, movilidad, clima, eventos y datos historicos para estimar la saturacion turistica en destinos colombianos.
                 </p>
                 <div class="d-flex flex-wrap gap-3 mt-4">
-                    <a class="btn btn-primary btn-lg" href="{{ url_for('dashboard') }}">Ver predicciones</a>
-                    <a class="btn btn-outline-light btn-lg" href="{{ url_for('mapa') }}">Explorar mapa</a>
+                    <a class="btn btn-primary btn-lg" href="{{ url_for('dashboard') }}">Ver dashboard</a>
+                    <a class="btn btn-outline-light btn-lg" href="{{ url_for('mapa') }}">Explorar destinos</a>
+                </div>
+            </div>
+            <div class="col-xl-4 offset-xl-1 col-lg-4 d-none d-lg-block" data-aos="fade-left" data-aos-delay="120">
+                <div class="hero-insight">
+                    <span>Lectura rapida</span>
+                    <strong>Detecta picos de visita y recomienda horarios con menor congestion.</strong>
+                    <div class="insight-scale" aria-hidden="true"><i></i><i></i><i></i></div>
                 </div>
             </div>
         </div>
@@ -25,12 +32,12 @@
         <div class="row g-4">
             <div class="col-md-4" data-aos="fade-up">
                 <div class="metric-card">
-                    <span>Turistas historicos</span>
+                    <span>Turistas historicos analizados</span>
                     <strong data-counter="{{ resumen.turistas }}">0</strong>
                 </div>
             </div>
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="metric-card">
+                <div class="metric-card metric-card-accent">
                     <span>Ocupacion promedio</span>
                     <strong data-counter="{{ resumen.ocupacion }}">0</strong>
                     <small>%</small>
@@ -38,7 +45,7 @@
             </div>
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="metric-card">
-                    <span>Riesgo alto</span>
+                    <span>Registros con riesgo alto</span>
                     <strong data-counter="{{ resumen.riesgo }}">0</strong>
                     <small>%</small>
                 </div>
@@ -47,26 +54,47 @@
     </div>
 </section>
 
-<section class="section-block">
+<section class="section-block intro-section">
     <div class="container">
         <div class="row g-5 align-items-center">
-            <div class="col-lg-6" data-aos="fade-right">
-                <span class="eyebrow">Problema</span>
-                <h2>La saturacion turistica afecta movilidad, experiencia y conservacion patrimonial.</h2>
+            <div class="col-lg-5" data-aos="fade-right">
+                <span class="eyebrow">Decision con contexto</span>
+                <h2>El turismo se disfruta mejor cuando la ocupacion se puede anticipar.</h2>
                 <p>
-                    El sistema combina datos historicos, temporada, festivos, movilidad, clima y eventos culturales
-                    para anticipar niveles de ocupacion en destinos turisticos como Salento, Guatape,
-                    Villa de Leyva, Barichara, Jardin, Filandia y Mompox.
+                    El sistema ayuda a comparar pueblos, reconocer meses criticos y convertir los datos en recomendaciones claras para visitantes, operadores y gestores locales.
                 </p>
             </div>
-            <div class="col-lg-6" data-aos="fade-left">
-                <div class="feature-grid">
-                    <div><strong>IA explicativa</strong><span>Razones claras detras de cada prediccion.</span></div>
-                    <div><strong>Alertas</strong><span>Niveles baja, media y alta con colores.</span></div>
-                    <div><strong>Mapas</strong><span>Marcadores interactivos sobre Colombia.</span></div>
-                    <div><strong>Recomendaciones</strong><span>Mejores ventanas para viajar.</span></div>
+            <div class="col-lg-7" data-aos="fade-left">
+                <div class="feature-grid feature-grid-wide">
+                    <div><strong>Temporada y festivos</strong><span>Identifica fechas donde la demanda suele subir.</span></div>
+                    <div><strong>Movilidad y eventos</strong><span>Relaciona accesos, agenda cultural y concentracion de visitantes.</span></div>
+                    <div><strong>Niveles visuales</strong><span>Clasifica la saturacion en baja, media o alta para leerla rapido.</span></div>
+                    <div><strong>Recomendaciones</strong><span>Propone horarios, reservas o ventanas de viaje mas tranquilas.</span></div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="destination-strip">
+    <div class="container">
+        <div class="section-heading" data-aos="fade-up">
+            <span class="eyebrow">Destinos incluidos</span>
+            <h2>Pueblos con identidad, datos y contexto turistico.</h2>
+        </div>
+        <div class="destination-grid mt-4">
+            <article class="destination-card" data-aos="fade-up">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Plaza_Mayor_-_Villa_de_Leyva%2C_Boyac%C3%A1%2C_Colombia.jpg?width=900" alt="Villa de Leyva">
+                <div><strong>Villa de Leyva</strong><span>Patrimonio colonial y plaza mayor.</span></div>
+            </article>
+            <article class="destination-card" data-aos="fade-up" data-aos-delay="80">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Valle_de_Cocora_Salento.jpg?width=900" alt="Salento">
+                <div><strong>Salento</strong><span>Paisaje cafetero y Valle de Cocora.</span></div>
+            </article>
+            <article class="destination-card" data-aos="fade-up" data-aos-delay="160">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Barichara_Colombia_01.JPG?width=900" alt="Barichara">
+                <div><strong>Barichara</strong><span>Calles de piedra y arquitectura tradicional.</span></div>
+            </article>
         </div>
     </div>
 </section>
