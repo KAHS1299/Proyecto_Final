@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}CRISP-ML Process | AI Tourism Colombia{% endblock %}
+
 {% block content %}
 <section class="page-header">
     <div class="container">
@@ -12,21 +13,191 @@
 <section class="section-block pt-0">
     <div class="container">
         <div class="crisp-timeline">
+            
             <article class="crisp-step" data-aos="fade-up">
                 <span>01</span>
-                <h2>Business Understanding</h2>
+                <h2>Business Understanding & Data</h2>
                 <p>Tourism overcrowding affects mobility, hotel availability, public services, resident quality of life, and visitor satisfaction in heritage towns.</p>
-                <div class="mini-grid">
-                    <strong>Goal: predict Low, Medium, or High saturation.</strong>
-                    <strong>Impact: smarter routes, booking decisions, and public planning.</strong>
+                
+                <style>
+                    .crisp-tabs .nav-link {
+                        color: #aeb4b9;
+                        background-color: rgba(0, 0, 0, 0.3);
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        border-radius: 8px;
+                        transition: all 0.3s ease-in-out;
+                    }
+                    .crisp-tabs .nav-link:hover {
+                        color: #ffffff;
+                        background-color: rgba(255, 255, 255, 0.05);
+                        border-color: rgba(255, 255, 255, 0.3);
+                    }
+                    .crisp-tabs .nav-link.active {
+                        color: #ffffff !important;
+                        background-color: rgba(255, 255, 255, 0.1) !important;
+                        border-color: rgba(255, 255, 255, 0.5) !important;
+                        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                    }
+                </style>
+
+                <ul class="nav nav-pills crisp-tabs mb-4 mt-4 gap-3" id="crisp-pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active fw-bold px-4 py-2" id="btn-objetivos" data-bs-toggle="pill" data-bs-target="#tab-objetivos" type="button" role="tab">🎯 1. Objectives</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link fw-bold px-4 py-2" id="btn-preguntas" data-bs-toggle="pill" data-bs-target="#tab-preguntas" type="button" role="tab">❓ 2. Key Questions</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link fw-bold px-4 py-2" id="btn-evaluacion" data-bs-toggle="pill" data-bs-target="#tab-evaluacion" type="button" role="tab">📊 3. Data</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link fw-bold px-4 py-2" id="btn-viabilidad" data-bs-toggle="pill" data-bs-target="#tab-viabilidad" type="button" role="tab">⚖️ 4. Viability</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content p-4 rounded border border-secondary" id="crisp-pills-tabContent" style="background-color: rgba(0,0,0,0.2);">
+                    
+                    <div class="tab-pane fade show active" id="tab-objetivos" role="tabpanel">
+                        <h3 class="fw-bold text-white mb-4">1. Business Objectives and Context</h3>
+                        
+                        <h5 class="text-light mt-4">The Core Problem</h5>
+                        <p class="text-secondary fs-6 lh-lg">
+                            Tourism in Colombia's heritage towns represents a fundamental economic engine for the regions. However, its extreme variability generates critical operational challenges. During high seasons and specific dates (such as Holy Week or traditional long weekends), flagship destinations like Villa de Leyva, Barichara, or Salento experience an overcapacity phenomenon. This massive and sudden influx causes the collapse of access road infrastructure, immediate saturation of hotel capacity, and a general degradation in the quality of the experience for both visitors and local residents.
+                        </p>
+
+                        <div class="card bg-dark border-secondary mt-4 mb-4 shadow-sm">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold text-white mb-3">🎯 Main Goal of the ML Project</h5>
+                                <p class="mb-0 text-secondary lh-lg">
+                                    Design, train, and deploy a predictive model based on the <strong>Random Forest</strong> algorithm capable of intelligently anticipating tourist congestion levels (Classified as <em>Low</em>, <em>Medium</em>, or <em>High</em>). The system will function as an operational intelligence tool to allow actors in the tourism ecosystem to plan preventive strategies.
+                                </p>
+                            </div>
+                        </div>
+
+                        <h5 class="text-light mb-3">Expected Impact (Stakeholders)</h5>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="p-3 border border-secondary rounded h-100 bg-black bg-opacity-25">
+                                    <h6 class="text-white fw-bold">🚶 Tourists</h6>
+                                    <p class="text-secondary small mb-0">Informed decision-making to modify travel dates or book in advance, improving their experience.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 border border-secondary rounded h-100 bg-black bg-opacity-25">
+                                    <h6 class="text-white fw-bold">🏛️ Local Authorities</h6>
+                                    <p class="text-secondary small mb-0">Early activation of road contingency plans and reinforcement of public cleaning and security services.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 border border-secondary rounded h-100 bg-black bg-opacity-25">
+                                    <h6 class="text-white fw-bold">🏨 Hotel Sector</h6>
+                                    <p class="text-secondary small mb-0">Rate optimization (Dynamic Pricing) and preparation of inventory and staff for demand peaks.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-preguntas" role="tabpanel">
+                        <h3 class="fw-bold text-white mb-4">2. Key Business Questions</h3>
+                        <p class="text-secondary mb-4 fs-6">For the Artificial Intelligence model to generate real value, the data architecture and classification algorithm have been specifically designed to answer three levels of analytical questions:</p>
+                        
+                        <ul class="list-group list-group-flush bg-transparent">
+                            <li class="list-group-item bg-transparent border-secondary p-4">
+                                <h5 class="text-white fw-bold"><span class="text-primary me-2">01.</span>Descriptive Level (Diagnosis)</h5>
+                                <p class="text-secondary mt-2 mb-0 lh-lg">What are the environmental and calendar factors (such as prevailing weather, presence of national holidays, or school seasons) that show the highest mathematical correlation with saturation peaks in heritage municipalities?</p>
+                            </li>
+                            
+                            <li class="list-group-item bg-transparent border-secondary p-4">
+                                <h5 class="text-white fw-bold"><span class="text-warning me-2">02.</span>Predictive Level (Prognosis)</h5>
+                                <p class="text-secondary mt-2 mb-0 lh-lg">Is it possible to predict with a high level of statistical confidence the saturation level (Low, Medium, High) of a specific destination in a given month of the year, based solely on variables that can be known months in advance?</p>
+                            </li>
+                            
+                            <li class="list-group-item bg-transparent border-secondary p-4 border-bottom-0">
+                                <h5 class="text-white fw-bold"><span class="text-success me-2">03.</span>Prescriptive Level (Actionability)</h5>
+                                <p class="text-secondary mt-2 mb-0 lh-lg">If the system predicts a "High" saturation level for Guatapé or Santa Fe de Antioquia, what business rules or automated recommendations can be issued on the user interface to mitigate the negative impact of massive vehicular flow from the main city?</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-evaluacion" role="tabpanel">
+                        <h3 class="fw-bold text-white mb-4">3. Data Structure Evaluation</h3>
+                        <p class="text-secondary mb-4 lh-lg">To model tourist flow behavior, a custom-engineered dataset was consolidated, comprising records from multiple heritage towns, structured into the following mathematical dimensions (Features):</p>
+                        
+                        <div class="row g-4 text-secondary">
+                            <div class="col-12 col-lg-6">
+                                <div class="p-4 border border-secondary rounded bg-dark h-100">
+                                    <h5 class="text-white fw-bold mb-3">📍 Spatial and Contextual Variables</h5>
+                                    <ul class="mb-0 lh-lg">
+                                        <li><strong><code>town</code> (Categorical):</strong> Unique identifier of the municipality.</li>
+                                        <li><strong><code>lat</code> and <code>lon</code> (Numerical):</strong> Exact geographic coordinates. Allow the model (if spatial distances are used) to understand proximity to large cities that inject tourists.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-lg-6">
+                                <div class="p-4 border border-secondary rounded bg-dark h-100">
+                                    <h5 class="text-white fw-bold mb-3">📅 Temporal Variables</h5>
+                                    <ul class="mb-0 lh-lg">
+                                        <li><strong><code>month</code> (Discrete):</strong> Month of the year, crucial for capturing intrinsic seasonalities.</li>
+                                        <li><strong><code>season</code> (Ordinal):</strong> General season label (Low, Medium, High).</li>
+                                        <li><strong><code>holiday</code> (Binary):</strong> Critical indicator of long weekends or national rest days.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6">
+                                <div class="p-4 border border-secondary rounded bg-dark h-100">
+                                    <h5 class="text-white fw-bold mb-3">🌤️ Local Dynamics Variables</h5>
+                                    <ul class="mb-0 lh-lg">
+                                        <li><strong><code>weather</code> (Categorical):</strong> Expected prevailing weather condition.</li>
+                                        <li><strong><code>mobility</code> (Ordinal):</strong> Historical level of pressure on land access roads.</li>
+                                        <li><strong><code>events</code> (Discrete):</strong> Density or magnitude of cultural events that act as visitor magnets outside the season.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6">
+                                <div class="p-4 border border-primary border-2 rounded bg-primary bg-opacity-10 h-100">
+                                    <h5 class="text-white fw-bold mb-3">🎯 Target Variable (Target Y)</h5>
+                                    <ul class="mb-0 lh-lg text-light">
+                                        <li><strong><code>saturation_level</code> (Categorical):</strong> The final label that the <em>Random Forest Classifier</em> model will learn to predict based on the cross-behavior of all the independent variables (X Matrix) mentioned above.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-viabilidad" role="tabpanel">
+                        <h3 class="fw-bold text-white mb-4">4. Technical Viability and Risk Management</h3>
+                        <p class="text-secondary lh-lg mb-4">
+                            The mathematical viability of the project is high because the selected algorithm (<strong>Random Forest</strong>) is robust at handling complex combinations of categorical data (like weather) and numerical data (like events), creating multiple decision trees that avoid traditional Overfitting. However, the architecture imposes strict control over the data flow:
+                        </p>
+
+                        <div class="alert mt-4 bg-dark border-start border-warning border-5 text-secondary shadow-sm p-4">
+                            <h4 class="fw-bold text-warning mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill me-2" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+                                The Critical Risk: Data Leakage
+                            </h4>
+                            <p class="mb-3 lh-lg">
+                                The original dataset includes post-trip historical variables such as <code>occupancy</code> (Real hotel occupancy percentage) and <code>estimated_tourists</code> (Final volume calculation). The risk of <strong>Data Leakage</strong> occurs if a data scientist includes these variables in the predictive model's training.
+                            </p>
+                            <h6 class="text-white fw-bold mt-4">The Architectural Measure:</h6>
+                            <p class="mb-0 lh-lg">
+                                It was established in the <em>Feature Engineering</em> pipeline (Phase 2) that these variables are <strong>excluded and purged</strong> from the training matrix X. This ensures that the algorithm does not "cheat" by memorizing results, forcing the neural network/ensemble to infer congestion based solely on anticipatable factors (month, holidays, weather), thus simulating a 100% real prediction scenario for a production application.
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </article>
+
             <article class="crisp-step" data-aos="fade-up">
                 <span>02</span>
                 <h2>Data Engineering</h2>
                 <p>The dataset combines town, season, holiday flag, weather, mobility, events, month, historical tourists, occupancy, and estimated tourist demand.</p>
                 <div class="pipeline"><i>Raw data</i><i>Cleaning</i><i>Feature engineering</i><i>Model-ready table</i></div>
             </article>
+
             <article class="crisp-step" data-aos="fade-up">
                 <span>03</span>
                 <h2>Model Engineering</h2>
@@ -35,24 +206,28 @@
                     <b>Input Features</b><b>Preprocessor</b><b>Random Forest</b><b>Saturation + Confidence</b>
                 </div>
             </article>
+
             <article class="crisp-step" data-aos="fade-up">
                 <span>04</span>
                 <h2>Model Evaluation</h2>
                 <p>Accuracy, precision, recall, F1-score, confusion matrix, and feature importance are exposed in the AI Analytics module.</p>
                 <a class="btn btn-outline-light" href="{{ url_for('analytics') }}">Open AI Analytics</a>
             </article>
+
             <article class="crisp-step" data-aos="fade-up">
                 <span>05</span>
                 <h2>Deployment</h2>
                 <p>Flask serves the user interface, prediction API, dashboard API, map API, and monitoring API. Bootstrap, Chart.js, Leaflet, and AOS power the presentation layer.</p>
                 <div class="pipeline"><i>Flask</i><i>ML model</i><i>REST APIs</i><i>Interactive UI</i></div>
             </article>
+
             <article class="crisp-step" data-aos="fade-up">
                 <span>06</span>
                 <h2>Monitoring</h2>
                 <p>The platform simulates live drift, confidence degradation, and retraining indicators to explain how AI systems are maintained after deployment.</p>
                 <a class="btn btn-primary" href="{{ url_for('prediction') }}">Run Prediction</a>
             </article>
+
         </div>
     </div>
 </section>

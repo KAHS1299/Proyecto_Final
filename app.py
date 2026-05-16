@@ -159,7 +159,7 @@ TOWN_CONTENT = {
 
 
 def load_data():
-    return normalize_tourism_data(pd.read_csv(DATA_PATH))
+    return pd.read_csv(DATA_PATH)
 
 
 def load_model():

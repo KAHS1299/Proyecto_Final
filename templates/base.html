@@ -23,7 +23,19 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('map_view') }}">Smart Map</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('prediction') }}">Prediction</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('analytics') }}">AI Analytics</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('crisp_ml') }}">CRISP-ML</a></li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="crispDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Business & Data Understanding
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="crispDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('crisp_ml') }}#objetivos">1. Business Objectives</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('crisp_ml') }}#preguntas">2. Key Questions</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('crisp_ml') }}#evaluacion">3. Data Evaluation</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('crisp_ml') }}#viabilidad">4. Viability Analysis</a></li>
+                        </ul>
+                    </li>
+
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('towns') }}">Towns</a></li>
                 </ul>
             </div>
