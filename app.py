@@ -2,7 +2,7 @@ from pathlib import Path
 import joblib
 import pandas as pd
 from flask import Flask, jsonify, render_template, request
-from model.training import FEATURES, engineer_features, train_model
+from model.training import FEATURES, engineer_features, normalize_tourism_data, train_model
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_PATH = BASE_DIR / "data" / "tourism.csv"
@@ -163,14 +163,20 @@ def load_data():
 
 
 def load_model():
-    if not MODEL_PATH.exists() or MODEL_PATH.stat().st_mtime < DATA_PATH.stat().st_mtime:
+    training_path = BASE_DIR / "model" / "training.py"
+    model_is_stale = (
+        not MODEL_PATH.exists()
+        or MODEL_PATH.stat().st_mtime < DATA_PATH.stat().st_mtime
+        or MODEL_PATH.stat().st_mtime < training_path.stat().st_mtime
+    )
+    if model_is_stale:
         train_model(DATA_PATH, MODEL_PATH)
     return joblib.load(MODEL_PATH)
 
 
 def latest_town_records():
     data = load_data()
-    latest = data.sort_values(["town", "month"]).groupby("town", as_index=False).tail(1)
+    latest = data.sort_values(["town", "year", "month"]).groupby("town", as_index=False).tail(1)
     return latest.sort_values("town")
 
 
@@ -178,8 +184,13 @@ def enriched_towns():
     rows = []
     for record in latest_town_records().to_dict(orient="records"):
         content = TOWN_CONTENT.get(record["town"], {})
-        rows.append({**record, **content})
+        record["occupancy"] = round(float(record["occupancy"]), 1)
+        rows.append({**content, **record})
     return rows
+
+
+def unique_options(column):
+    return sorted(load_data()[column].dropna().unique().tolist())
 
 
 @app.route("/")
@@ -207,8 +218,14 @@ def map_view():
 
 @app.route("/prediction")
 def prediction():
-    towns = sorted(load_data()["town"].unique())
-    return render_template("prediction.html", towns=towns)
+    return render_template(
+        "prediction.html",
+        towns=unique_options("town"),
+        seasons=unique_options("season"),
+        holidays=unique_options("holiday"),
+        weather_options=unique_options("weather"),
+        mobility_options=unique_options("mobility"),
+    )
 
 
 @app.route("/analytics")
@@ -233,8 +250,17 @@ def api_dashboard():
         tourists=("historical_tourists", "mean"),
         occupancy=("occupancy", "mean"),
         estimated=("estimated_tourists", "mean"),
+        income=("tourism_income_usd", "mean"),
+        capacity=("tourist_capacity", "mean"),
     ).sort_values("tourists", ascending=False)
     by_month = data.groupby("month", as_index=False).agg(tourists=("historical_tourists", "sum")).sort_values("month")
+    by_year = data.groupby("year", as_index=False).agg(tourists=("historical_tourists", "sum")).sort_values("year")
+    by_type = data.groupby("tourism_type", as_index=False).agg(tourists=("historical_tourists", "sum")).sort_values(
+        "tourists", ascending=False
+    )
+    by_region = data.groupby("region", as_index=False).agg(tourists=("historical_tourists", "sum")).sort_values(
+        "tourists", ascending=False
+    )
     levels = data["saturation_level"].value_counts().reindex(["Low", "Medium", "High"], fill_value=0)
     return jsonify(
         {
@@ -242,8 +268,16 @@ def api_dashboard():
             "tourists": by_town["tourists"].round(0).astype(int).tolist(),
             "occupancy": by_town["occupancy"].round(1).tolist(),
             "estimated": by_town["estimated"].round(0).astype(int).tolist(),
-            "months": by_month["month"].tolist(),
+            "income": by_town["income"].round(0).astype(int).tolist(),
+            "capacity": by_town["capacity"].round(0).astype(int).tolist(),
+            "months": by_month["month"].astype(int).tolist(),
             "monthly": by_month["tourists"].astype(int).tolist(),
+            "years": by_year["year"].astype(int).tolist(),
+            "yearly": by_year["tourists"].astype(int).tolist(),
+            "tourism_types": by_type["tourism_type"].tolist(),
+            "tourism_type_totals": by_type["tourists"].astype(int).tolist(),
+            "regions": by_region["region"].tolist(),
+            "region_totals": by_region["tourists"].astype(int).tolist(),
             "levels": levels.tolist(),
         }
     )
@@ -277,7 +311,14 @@ def api_monitoring():
 def api_prediction():
     payload = request.get_json(force=True)
     data = pd.DataFrame([payload])
-    data["occupancy"] = min(99, max(18, (data.loc[0, "historical_tourists"] / 125) + data.loc[0, "events"] * 6))
+    dataset = load_data()
+    town_rows = dataset[dataset["town"] == payload.get("town")]
+    month_rows = town_rows[town_rows["month"] == pd.to_numeric(payload.get("month"), errors="coerce")]
+    reference_rows = month_rows if not month_rows.empty else town_rows
+    if reference_rows.empty:
+        reference_rows = dataset
+
+    data["occupancy"] = round(float(reference_rows["occupancy"].mean()), 1)
     features = engineer_features(data)[FEATURES]
 
     model = load_model()
@@ -300,7 +341,8 @@ def api_prediction():
             "confidence": confidence,
             "tourists": estimated,
             "recommendation": recommendation,
-            "explanation": "Random Forest evaluated season, holidays, weather, mobility, events, month, historical flow, and engineered pressure indicators.",
+            "explanation": "Random Forest evaluated the synchronized dataset fields: town, season, holiday, weather, mobility, events, month, historical flow, hotel occupancy, and engineered pressure indicators.",
+            "reference_occupancy": float(data.loc[0, "occupancy"]),
             "probabilities": {
                 label: round(float(prob) * 100, 1)
                 for label, prob in zip(classifier.classes_, probabilities)
