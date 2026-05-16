@@ -1,9 +1,7 @@
 from pathlib import Path
-
 import joblib
 import pandas as pd
 from flask import Flask, jsonify, render_template, request
-
 from model.training import FEATURES, engineer_features, train_model
 
 BASE_DIR = Path(__file__).resolve().parent
