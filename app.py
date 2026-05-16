@@ -2,12 +2,7 @@ from pathlib import Path
 import joblib
 import pandas as pd
 from flask import Flask, jsonify, render_template, request
-<<<<<<< HEAD
 from model.training import FEATURES, engineer_features, train_model
-=======
-
-from model.training import FEATURES, engineer_features, normalize_tourism_data, train_model
->>>>>>> ea48f39c1cbdabff0d1e67910050eca1d19088a6
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_PATH = BASE_DIR / "data" / "tourism.csv"
