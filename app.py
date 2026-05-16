@@ -2,7 +2,7 @@ from pathlib import Path
 import joblib
 import pandas as pd
 from flask import Flask, jsonify, render_template, request
-from model.training import FEATURES, engineer_features, train_model
+from model.training import FEATURES, engineer_features, train_model, normalize_tourism_data
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_PATH = BASE_DIR / "data" / "tourism.csv"
@@ -181,8 +181,6 @@ def load_data():
 def load_model():
     if not MODEL_PATH.exists() or MODEL_PATH.stat().st_mtime < DATA_PATH.stat().st_mtime:
         train_model(DATA_PATH, MODEL_PATH)
-    
-    # Retorna la carga dinámica usando la constante de Path absolute de forma segura
     return joblib.load(MODEL_PATH)
 
 
