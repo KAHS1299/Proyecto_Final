@@ -1,5 +1,4 @@
 from pathlib import Path
-
 import joblib
 import pandas as pd
 from sklearn.compose import ColumnTransformer
@@ -68,7 +67,12 @@ def normalize_tourism_data(data, require_targets=True):
     if missing:
         raise ValueError(f"Tourism dataset is missing required columns: {', '.join(missing)}")
 
-    return framed.dropna(subset=required_columns)
+    # CORRECCIÓN DE SEGURIDAD: Limpieza estricta de filas vacías o nulas para Scikit-Learn
+    framed = framed.dropna(subset=required_columns)
+    if require_targets:
+        framed = framed[framed["saturation_level"].isin(LABELS)]
+        
+    return framed
 
 
 def engineer_features(data, require_targets=False):
@@ -89,6 +93,12 @@ def train_model(data_path=None, model_path=None):
     model_path = Path(model_path or base_dir / "model" / "model.pkl")
 
     data = engineer_features(pd.read_csv(data_path), require_targets=True)
+    
+    # Control de contingencia en caso de que las muestras sean extremadamente bajas en producción
+    if len(data) < 5:
+        # Duplicamos sintéticamente el mini dataset de arranque para no romper las matrices de división
+        data = pd.concat([data] * 5, ignore_index=True)
+
     X = data[FEATURES]
     y = data["saturation_level"]
 
@@ -113,9 +123,13 @@ def train_model(data_path=None, model_path=None):
         ]
     )
 
-    stratify = y if y.value_counts().min() >= 2 else None
+    # CORRECCIÓN CONTROL SAMPLES: Estratificación segura inteligente
+    min_class_count = y.value_counts().min()
+    stratify = y if min_class_count >= 2 and len(y.unique()) > 1 else None
+    test_size = 0.28 if len(data) > 10 else 0.1
+
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.28, random_state=42, stratify=stratify
+        X, y, test_size=test_size, random_state=42, stratify=stratify
     )
 
     classifier.fit(X_train, y_train)
