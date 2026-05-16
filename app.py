@@ -158,22 +158,6 @@ TOWN_CONTENT = {
 }
 
 
-def normalize_tourism_data(df):
-    df.columns = df.columns.str.strip().str.lower()
-
-    numeric_columns = [
-        "historical_tourists",
-        "occupancy",
-        "estimated_tourists",
-        "events"
-    ]
-
-    for col in numeric_columns:
-        if col in df.columns:
-            df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
-
-    return df
-
 def load_data():
     return normalize_tourism_data(pd.read_csv(DATA_PATH))
 
