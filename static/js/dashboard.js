@@ -3,6 +3,7 @@ fetch("/api/dashboard")
     .then((data) => {
         const grid = "rgba(255,255,255,0.11)";
         const text = "#dbeafe";
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
         // Bar Chart
         new Chart(document.getElementById("barChart"), {
@@ -45,7 +46,7 @@ fetch("/api/dashboard")
         new Chart(document.getElementById("lineChart"), {
             type: "line",
             data: {
-                labels: data.months.map(m => `Month ${m}`),
+                labels: data.months.map((month) => monthNames[month - 1] || `Month ${month}`),
                 datasets: [{
                     label: "Monthly Flow",
                     data: data.monthly,
