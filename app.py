@@ -162,7 +162,6 @@ def load_data():
     return normalize_tourism_data(pd.read_csv(DATA_PATH))
 
 
-# 🌟 CORRECCIÓN DE LA RUTA DINÁMICA DE CARGA EN PRODUCCIÓN:
 def load_model():
     if not MODEL_PATH.exists() or MODEL_PATH.stat().st_mtime < DATA_PATH.stat().st_mtime:
         train_model(DATA_PATH, MODEL_PATH)
