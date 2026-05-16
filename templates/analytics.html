@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}AI Analytics | AI Tourism Colombia{% endblock %}
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <span class="eyebrow">Model Evaluation</span>
+        <h1>AI Analytics</h1>
+        <p>Transparent Random Forest performance indicators for academic review and public presentation.</p>
+    </div>
+</section>
+
+<section class="section-block pt-0">
+    <div class="container">
+        <div class="row g-4 metric-row" data-aos="fade-up">
+            <div class="col-md-3"><div class="metric-card"><span>Accuracy</span><strong id="accuracyMetric">--</strong></div></div>
+            <div class="col-md-3"><div class="metric-card"><span>Precision</span><strong id="precisionMetric">--</strong></div></div>
+            <div class="col-md-3"><div class="metric-card"><span>Recall</span><strong id="recallMetric">--</strong></div></div>
+            <div class="col-md-3"><div class="metric-card"><span>F1-score</span><strong id="f1Metric">--</strong></div></div>
+        </div>
+
+        <div class="row g-4 mt-1">
+            <div class="col-lg-7" data-aos="fade-up">
+                <div class="panel">
+                    <h2>Feature Importance</h2>
+                    <canvas id="featureChart" height="150"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+                <div class="panel">
+                    <h2>Confusion Matrix</h2>
+                    <div id="matrixGrid" class="matrix-grid"></div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up">
+                <div class="panel">
+                    <h2>Model Drift Monitoring</h2>
+                    <canvas id="driftChart" height="150"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="panel">
+                    <h2>Confidence Trend</h2>
+                    <canvas id="confidenceTrendChart" height="150"></canvas>
+                    <p id="retrainingNote" class="text-light-emphasis mt-3 mb-0"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,15 @@
+column,type,allowed_values,description,model_role;;;;;;;;;;;
+"town,categorical,""Villa de Leyva"; Salento; Barichara; Guatapé; Jardín; Filandia; Mompox; Jericó; Monguí; Salamina; Honda;" Santa Fe de Antioquia"",Name of the Colombian heritage town,Input feature"
+lat,numeric_decimal,Latitude coordinate,Geographic latitude used by Leaflet map,Map metadata;;;;;;;;;;;
+lon,numeric_decimal,Longitude coordinate,Geographic longitude used by Leaflet map,Map metadata;;;;;;;;;;;
+"season,categorical,""Low"; Medium;" High"",Tourism season intensity for the scenario,Input feature";;;;;;;;;
+"holiday,categorical,""Yes";" No"",Holiday-period indicator,Input feature";;;;;;;;;;
+"weather,categorical,""Mild"; Hot; Rainy;" Cold"",Dominant weather condition,Input feature";;;;;;;;
+"mobility,categorical,""Low"; Medium;" High"",Access and movement pressure around the destination,Input feature";;;;;;;;;
+events,numeric_integer,0-5,Number of relevant tourism events in the period,Input feature;;;;;;;;;;;
+month,numeric_integer,1-12,Month of the year,Input feature;;;;;;;;;;;
+historical_tourists,numeric_integer,Positive integer,Historical visitor flow used as demand reference,Input feature;;;;;;;;;;;
+occupancy,numeric_percentage,0-100,Estimated accommodation or destination occupancy percentage,Feature engineering and dashboard;;;;;;;;;;;
+"saturation_level,categorical,""Low"; Medium;" High"",Tourist saturation class predicted by the classifier,Classification target";;;;;;;;;
+estimated_tourists,numeric_integer,Positive integer,Estimated tourist volume for the scenario,Regression target;;;;;;;;;;;
+recommendation,text,Free text,Smart travel recommendation shown in the platform,User-facing output;;;;;;;;;;;

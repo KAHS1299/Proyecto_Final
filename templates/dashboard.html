@@ -4,8 +4,8 @@
 <section class="page-header">
     <div class="container">
         <span class="eyebrow">Intelligent Analytics</span>
-        <h1>Tourist Saturation</h1>
-        <p>Interactive charts to compare towns, months, and occupancy levels.</p>
+        <h1>Tourist Saturation Dashboard</h1>
+        <p>Operational intelligence for comparing towns, monthly demand, occupancy pressure, and predicted visitor flows.</p>
     </div>
 </section>
 
@@ -30,6 +30,22 @@
                 <div class="panel">
                     <h2>Monthly Aggregate Forecast</h2>
                     <canvas id="lineChart" height="90"></canvas>
+                </div>
+            </div>
+
+            <div class="col-lg-6" data-aos="fade-up">
+                <div class="panel">
+                    <h2>Occupancy Pressure by Town</h2>
+                    <canvas id="occupancyChart" height="130"></canvas>
+                </div>
+            </div>
+
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="panel insight-list">
+                    <h2>AI Decision Signals</h2>
+                    <div><strong>Holiday effect</strong><span>Long weekends and national vacations are treated as high-demand amplifiers.</span></div>
+                    <div><strong>Mobility pressure</strong><span>Access from large cities increases congestion risk in towns such as Guatape and Santa Fe de Antioquia.</span></div>
+                    <div><strong>Event density</strong><span>Cultural events and festivals raise short-term saturation even when the season is moderate.</span></div>
                 </div>
             </div>
         </div>

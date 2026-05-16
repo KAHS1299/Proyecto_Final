@@ -62,4 +62,25 @@ fetch("/api/dashboard")
                 }
             }
         });
+
+        new Chart(document.getElementById("occupancyChart"), {
+            type: "bar",
+            data: {
+                labels: data.towns,
+                datasets: [{
+                    label: "Occupancy %",
+                    data: data.occupancy,
+                    backgroundColor: data.occupancy.map((value) => value > 75 ? "#ef4f5f" : value > 45 ? "#f2bd3d" : "#32c977"),
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: "y",
+                plugins: { legend: { labels: { color: text } } },
+                scales: {
+                    x: { ticks: { color: text }, grid: { color: grid }, max: 100 },
+                    y: { ticks: { color: text }, grid: { color: grid } }
+                }
+            }
+        });
     });

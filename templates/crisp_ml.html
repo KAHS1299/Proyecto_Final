@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}CRISP-ML Process | AI Tourism Colombia{% endblock %}
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <span class="eyebrow">CRISP-ML Methodology</span>
+        <h1>From tourism problem to monitored AI service</h1>
+        <p>The platform is organized around six CRISP-ML phases: business understanding, data engineering, model engineering, evaluation, deployment, and monitoring.</p>
+    </div>
+</section>
+
+<section class="section-block pt-0">
+    <div class="container">
+        <div class="crisp-timeline">
+            <article class="crisp-step" data-aos="fade-up">
+                <span>01</span>
+                <h2>Business Understanding</h2>
+                <p>Tourism overcrowding affects mobility, hotel availability, public services, resident quality of life, and visitor satisfaction in heritage towns.</p>
+                <div class="mini-grid">
+                    <strong>Goal: predict Low, Medium, or High saturation.</strong>
+                    <strong>Impact: smarter routes, booking decisions, and public planning.</strong>
+                </div>
+            </article>
+            <article class="crisp-step" data-aos="fade-up">
+                <span>02</span>
+                <h2>Data Engineering</h2>
+                <p>The dataset combines town, season, holiday flag, weather, mobility, events, month, historical tourists, occupancy, and estimated tourist demand.</p>
+                <div class="pipeline"><i>Raw data</i><i>Cleaning</i><i>Feature engineering</i><i>Model-ready table</i></div>
+            </article>
+            <article class="crisp-step" data-aos="fade-up">
+                <span>03</span>
+                <h2>Model Engineering</h2>
+                <p>Random Forest was selected because it handles non-linear demand patterns, categorical variables, and feature importance interpretation.</p>
+                <div class="architecture">
+                    <b>Input Features</b><b>Preprocessor</b><b>Random Forest</b><b>Saturation + Confidence</b>
+                </div>
+            </article>
+            <article class="crisp-step" data-aos="fade-up">
+                <span>04</span>
+                <h2>Model Evaluation</h2>
+                <p>Accuracy, precision, recall, F1-score, confusion matrix, and feature importance are exposed in the AI Analytics module.</p>
+                <a class="btn btn-outline-light" href="{{ url_for('analytics') }}">Open AI Analytics</a>
+            </article>
+            <article class="crisp-step" data-aos="fade-up">
+                <span>05</span>
+                <h2>Deployment</h2>
+                <p>Flask serves the user interface, prediction API, dashboard API, map API, and monitoring API. Bootstrap, Chart.js, Leaflet, and AOS power the presentation layer.</p>
+                <div class="pipeline"><i>Flask</i><i>ML model</i><i>REST APIs</i><i>Interactive UI</i></div>
+            </article>
+            <article class="crisp-step" data-aos="fade-up">
+                <span>06</span>
+                <h2>Monitoring</h2>
+                <p>The platform simulates live drift, confidence degradation, and retraining indicators to explain how AI systems are maintained after deployment.</p>
+                <a class="btn btn-primary" href="{{ url_for('prediction') }}">Run Prediction</a>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}

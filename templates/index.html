@@ -7,19 +7,19 @@
         <div class="row align-items-end min-vh-100 pb-5 pt-5">
             <div class="col-xl-7 col-lg-8" data-aos="fade-up">
                 <span class="eyebrow">Smart Tourism for Heritage Towns</span>
-                <h1 class="hero-title fw-bold mt-3">Anticipate occupancy before choosing your destination.</h1>
+                <h1 class="hero-title fw-bold mt-3">AI Tourism Colombia</h1>
                 <p class="lead hero-copy mt-4">
-                    An analytics platform that combines season, mobility, weather, events, and historical data to estimate tourist saturation in Colombian destinations.
+                    A futuristic Machine Learning platform that predicts tourist saturation in Colombian heritage towns and turns visitor pressure into actionable decisions.
                 </p>
                 <div class="d-flex flex-wrap gap-3 mt-4">
                     <a class="btn btn-primary btn-lg" href="{{ url_for('dashboard') }}">View Dashboard</a>
-                    <a class="btn btn-outline-light btn-lg" href="{{ url_for('map_view') }}">Explore Destinations</a>
+                    <a class="btn btn-outline-light btn-lg" href="{{ url_for('crisp_ml') }}">View CRISP-ML Process</a>
                 </div>
             </div>
             <div class="col-xl-4 offset-xl-1 col-lg-4 d-none d-lg-block" data-aos="fade-left" data-aos-delay="120">
                 <div class="hero-insight">
                     <span>Quick Read</span>
-                    <strong>Detect peak visiting times and receive recommendations for lower congestion periods.</strong>
+                    <strong>Random Forest classifies each destination as Low, Medium, or High saturation with confidence scoring.</strong>
                     <div class="insight-scale" aria-hidden="true"><i></i><i></i><i></i></div>
                 </div>
             </div>
@@ -32,8 +32,8 @@
         <div class="row g-4">
             <div class="col-md-4" data-aos="fade-up">
                 <div class="metric-card">
-                    <span>Analyzed Historical Tourists</span>
-                    <strong data-counter="{{ summary.tourists }}">0</strong>
+                    <span>Heritage Towns Modeled</span>
+                    <strong data-counter="{{ summary.towns }}">0</strong>
                 </div>
             </div>
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
@@ -45,8 +45,8 @@
             </div>
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="metric-card">
-                    <span>High-Risk Records</span>
-                    <strong data-counter="{{ summary.risk }}">0</strong>
+                    <span>Model Accuracy</span>
+                    <strong data-counter="{{ summary.accuracy }}">0</strong>
                     <small>%</small>
                 </div>
             </div>
@@ -58,18 +58,18 @@
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-5" data-aos="fade-right">
-                <span class="eyebrow">Contextual Decisions</span>
-                <h2>Tourism is best enjoyed when occupancy can be anticipated.</h2>
+                <span class="eyebrow">Business Understanding</span>
+                <h2>Tourism overcrowding needs predictive decisions, not reactive control.</h2>
                 <p>
-                    The system helps compare towns, recognize critical months, and convert data into clear recommendations for visitors, operators, and local managers.
+                    Heritage towns face road congestion, pressure on accommodations, long attraction lines, and reduced resident quality of life during holidays and major events. This platform uses AI to anticipate saturation before visitors arrive.
                 </p>
             </div>
             <div class="col-lg-7" data-aos="fade-left">
                 <div class="feature-grid feature-grid-wide">
-                    <div><strong>Season and Holidays</strong><span>Identify dates where demand typically spikes.</span></div>
-                    <div><strong>Mobility and Events</strong><span>Relates access points, cultural agendas, and visitor concentration.</span></div>
-                    <div><strong>Visual Levels</strong><span>Classifies saturation into low, medium, or high for rapid interpretation.</span></div>
-                    <div><strong>Recommendations</strong><span>Suggests schedules, bookings, or quieter travel windows.</span></div>
+                    <div><strong>Public Planning</strong><span>Supports municipal decisions for mobility, safety, and visitor flow.</span></div>
+                    <div><strong>Visitor Experience</strong><span>Recommends quieter time windows and booking strategies.</span></div>
+                    <div><strong>AI Prediction</strong><span>Uses engineered demand signals and Random Forest classification.</span></div>
+                    <div><strong>Educational Value</strong><span>Shows the full CRISP-ML process from data to monitoring.</span></div>
                 </div>
             </div>
         </div>
@@ -83,18 +83,12 @@
             <h2>Towns with identity, data, and tourist context.</h2>
         </div>
         <div class="destination-grid mt-4">
-            <article class="destination-card" data-aos="fade-up">
-                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Plaza_Mayor_-_Villa_de_Leyva%2C_Boyac%C3%A1%2C_Colombia.jpg?width=900" alt="Villa de Leyva">
-                <div><strong>Villa de Leyva</strong><span>Colonial heritage and major square.</span></div>
+            {% for town in towns %}
+            <article class="destination-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+                <img src="{{ town.image }}" alt="{{ town.town }}">
+                <div><strong>{{ town.town }}</strong><span>{{ town.description }}</span></div>
             </article>
-            <article class="destination-card" data-aos="fade-up" data-aos-delay="80">
-                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Valle_de_Cocora_Salento.jpg?width=900" alt="Salento">
-                <div><strong>Salento</strong><span>Coffee landscape and Cocora Valley.</span></div>
-            </article>
-            <article class="destination-card" data-aos="fade-up" data-aos-delay="160">
-                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Barichara_Colombia_01.JPG?width=900" alt="Barichara">
-                <div><strong>Barichara</strong><span>Stone streets and traditional architecture.</span></div>
-            </article>
+            {% endfor %}
         </div>
     </div>
 </section>

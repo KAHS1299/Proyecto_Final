@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}About Towns | AI Tourism Colombia{% endblock %}
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <span class="eyebrow">About Towns</span>
+        <h1>Colombian heritage destinations</h1>
+        <p>Educational profiles with history, attractions, recommended seasons, occupancy, AI predictions, and smart travel recommendations.</p>
+    </div>
+</section>
+
+<section class="section-block pt-0">
+    <div class="container">
+        <div class="town-grid">
+            {% for town in towns %}
+            <article class="town-card" data-aos="fade-up" data-aos-delay="{{ (loop.index0 % 3) * 80 }}">
+                <img src="{{ town.image }}" alt="{{ town.town }}">
+                <div class="town-card-body">
+                    <div class="d-flex justify-content-between gap-3 align-items-start">
+                        <div>
+                            <span class="eyebrow">{{ town.department }}</span>
+                            <h2>{{ town.town }}</h2>
+                        </div>
+                        <span class="risk-pill risk-{{ town.saturation_level|lower }}">{{ town.saturation_level }}</span>
+                    </div>
+                    <p>{{ town.description }}</p>
+                    <p class="history">{{ town.history }}</p>
+                    <div class="town-stats">
+                        <span>Occupancy <strong>{{ town.occupancy }}%</strong></span>
+                        <span>Tourists <strong>{{ "{:,}".format(town.historical_tourists) }}</strong></span>
+                    </div>
+                    <h3>Main attractions</h3>
+                    <ul>
+                        {% for attraction in town.attractions %}
+                        <li>{{ attraction }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="smart-note">
+                        <strong>Recommended season:</strong> {{ town.season }}<br>
+                        <strong>AI recommendation:</strong> {{ town.recommendation }}
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
