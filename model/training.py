@@ -31,7 +31,7 @@ MONTHS = {
 
 def normalize_tourism_data(data, require_targets=True):
     framed = data.copy()
-    framed.columns = [column.strip() for column in framed.columns]
+    framed.columns = [column.strip().lower() for column in framed.columns]
 
     if "occupancy" not in framed.columns and "hotel_occupancy" in framed.columns:
         framed["occupancy"] = framed["hotel_occupancy"]
@@ -54,7 +54,34 @@ def normalize_tourism_data(data, require_targets=True):
         month_text = framed["month"].astype(str).str.strip().str.lower()
         framed["month"] = pd.to_numeric(framed["month"], errors="coerce").fillna(month_text.map(MONTHS))
 
-    for column in ["events", "month", "historical_tourists", "estimated_tourists", "occupancy", "lat", "lon"]:
+    numeric_columns = [
+        "lat",
+        "lon",
+        "altitude_m",
+        "year",
+        "month",
+        "avg_temperature",
+        "rainfall_mm",
+        "humidity",
+        "mobility_index",
+        "road_traffic",
+        "public_transport_flow",
+        "vehicle_entries",
+        "events",
+        "tourist_capacity",
+        "hotel_capacity",
+        "historical_tourists",
+        "estimated_tourists",
+        "hotel_occupancy",
+        "airbnb_occupancy",
+        "tourism_growth_rate",
+        "saturation_index",
+        "avg_hotel_price_usd",
+        "avg_restaurant_price_usd",
+        "tourism_income_usd",
+        "occupancy",
+    ]
+    for column in numeric_columns:
         if column in framed.columns:
             framed[column] = pd.to_numeric(framed[column], errors="coerce")
 
@@ -67,7 +94,6 @@ def normalize_tourism_data(data, require_targets=True):
     if missing:
         raise ValueError(f"Tourism dataset is missing required columns: {', '.join(missing)}")
 
-    # CORRECCIÓN DE SEGURIDAD: Limpieza estricta de filas vacías o nulas para Scikit-Learn
     framed = framed.dropna(subset=required_columns)
     if require_targets:
         framed = framed[framed["saturation_level"].isin(LABELS)]
@@ -94,9 +120,7 @@ def train_model(data_path=None, model_path=None):
 
     data = engineer_features(pd.read_csv(data_path), require_targets=True)
     
-    # Control de contingencia en caso de que las muestras sean extremadamente bajas en producción
     if len(data) < 5:
-        # Duplicamos sintéticamente el mini dataset de arranque para no romper las matrices de división
         data = pd.concat([data] * 5, ignore_index=True)
 
     X = data[FEATURES]
@@ -123,7 +147,6 @@ def train_model(data_path=None, model_path=None):
         ]
     )
 
-    # CORRECCIÓN CONTROL SAMPLES: Estratificación segura inteligente
     min_class_count = y.value_counts().min()
     stratify = y if min_class_count >= 2 and len(y.unique()) > 1 else None
     test_size = 0.28 if len(data) > 10 else 0.1

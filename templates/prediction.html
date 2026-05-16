@@ -23,29 +23,30 @@
 
                     <label>Season</label>
                     <select name="season" class="form-select">
-                        <option value="High">High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low">Low</option>
+                        {% for season in seasons %}
+                        <option value="{{ season }}">{{ season }}</option>
+                        {% endfor %}
                     </select>
 
                     <label>Holiday</label>
                     <select name="holiday" class="form-select">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
+                        {% for holiday in holidays %}
+                        <option value="{{ holiday }}">{{ holiday }}</option>
+                        {% endfor %}
                     </select>
 
                     <label>Weather</label>
                     <select name="weather" class="form-select">
-                        <option value="Mild">Mild</option>
-                        <option value="Hot">Hot</option>
-                        <option value="Rainy">Rainy</option>
+                        {% for weather in weather_options %}
+                        <option value="{{ weather }}">{{ weather }}</option>
+                        {% endfor %}
                     </select>
 
                     <label>Mobility</label>
                     <select name="mobility" class="form-select">
-                        <option value="High">High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low">Low</option>
+                        {% for mobility in mobility_options %}
+                        <option value="{{ mobility }}">{{ mobility }}</option>
+                        {% endfor %}
                     </select>
 
                     <div class="row">
