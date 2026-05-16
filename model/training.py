@@ -14,9 +14,65 @@ NUMERICAL = ["events", "month", "historical_tourists", "occupancy_pressure", "ev
 FEATURES = CATEGORICAL + NUMERICAL
 LABELS = ["Low", "Medium", "High"]
 
+MONTHS = {
+    "january": 1,
+    "february": 2,
+    "march": 3,
+    "april": 4,
+    "may": 5,
+    "june": 6,
+    "july": 7,
+    "august": 8,
+    "september": 9,
+    "october": 10,
+    "november": 11,
+    "december": 12,
+}
 
-def engineer_features(data):
+
+def normalize_tourism_data(data, require_targets=True):
     framed = data.copy()
+    framed.columns = [column.strip() for column in framed.columns]
+
+    if "occupancy" not in framed.columns and "hotel_occupancy" in framed.columns:
+        framed["occupancy"] = framed["hotel_occupancy"]
+
+    if "mobility" not in framed.columns:
+        if "mobility_index" in framed.columns:
+            mobility_index = pd.to_numeric(framed["mobility_index"], errors="coerce")
+        elif "road_traffic" in framed.columns:
+            mobility_index = pd.to_numeric(framed["road_traffic"], errors="coerce")
+        else:
+            mobility_index = pd.Series(50, index=framed.index)
+
+        framed["mobility"] = pd.cut(
+            mobility_index.fillna(mobility_index.median()).fillna(50),
+            bins=[-1, 39, 69, 100],
+            labels=["Low", "Medium", "High"],
+        ).astype(str)
+
+    if "month" in framed.columns:
+        month_text = framed["month"].astype(str).str.strip().str.lower()
+        framed["month"] = pd.to_numeric(framed["month"], errors="coerce").fillna(month_text.map(MONTHS))
+
+    for column in ["events", "month", "historical_tourists", "estimated_tourists", "occupancy", "lat", "lon"]:
+        if column in framed.columns:
+            framed[column] = pd.to_numeric(framed[column], errors="coerce")
+
+    required_columns = CATEGORICAL + ["events", "month", "historical_tourists", "occupancy"]
+    if require_targets:
+        required_columns += ["saturation_level", "estimated_tourists"]
+
+    required = set(required_columns)
+    missing = sorted(required.difference(framed.columns))
+    if missing:
+        raise ValueError(f"Tourism dataset is missing required columns: {', '.join(missing)}")
+
+    return framed.dropna(subset=required_columns)
+
+
+def engineer_features(data, require_targets=False):
+    framed = normalize_tourism_data(data, require_targets=require_targets)
     framed["occupancy_pressure"] = framed["occupancy"] / 100
     framed["event_pressure"] = framed["events"] * framed["historical_tourists"] / 10000
     return framed
@@ -32,7 +88,7 @@ def train_model(data_path=None, model_path=None):
     data_path = Path(data_path or base_dir / "data" / "tourism.csv")
     model_path = Path(model_path or base_dir / "model" / "model.pkl")
 
-    data = engineer_features(pd.read_csv(data_path))
+    data = engineer_features(pd.read_csv(data_path), require_targets=True)
     X = data[FEATURES]
     y = data["saturation_level"]
 

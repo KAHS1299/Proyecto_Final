@@ -4,7 +4,7 @@ import joblib
 import pandas as pd
 from flask import Flask, jsonify, render_template, request
 
-from model.training import FEATURES, engineer_features, train_model
+from model.training import FEATURES, engineer_features, normalize_tourism_data, train_model
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_PATH = BASE_DIR / "data" / "tourism.csv"
@@ -161,7 +161,7 @@ TOWN_CONTENT = {
 
 
 def load_data():
-    return pd.read_csv(DATA_PATH)
+    return normalize_tourism_data(pd.read_csv(DATA_PATH))
 
 
 def load_model():
