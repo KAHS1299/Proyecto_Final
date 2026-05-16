@@ -165,6 +165,8 @@ def load_data():
 def load_model():
     if not MODEL_PATH.exists() or MODEL_PATH.stat().st_mtime < DATA_PATH.stat().st_mtime:
         train_model(DATA_PATH, MODEL_PATH)
+    
+    # Retorna la carga dinámica usando la constante de Path absolute de forma segura
     return joblib.load(MODEL_PATH)
 
 
