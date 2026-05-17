@@ -159,7 +159,7 @@ TOWN_CONTENT = {
 
 
 def load_data():
-    return pd.read_csv(DATA_PATH)
+    return normalize_tourism_data(pd.read_csv(DATA_PATH))
 
 
 def load_model():
@@ -309,46 +309,80 @@ def api_monitoring():
 
 @app.route("/api/prediction", methods=["POST"])
 def api_prediction():
-    payload = request.get_json(force=True)
-    data = pd.DataFrame([payload])
-    dataset = load_data()
-    town_rows = dataset[dataset["town"] == payload.get("town")]
-    month_rows = town_rows[town_rows["month"] == pd.to_numeric(payload.get("month"), errors="coerce")]
-    reference_rows = month_rows if not month_rows.empty else town_rows
-    if reference_rows.empty:
-        reference_rows = dataset
+    try:
+        payload = request.get_json(force=True) or {}
+        dataset = load_data()
 
-    data["occupancy"] = round(float(reference_rows["occupancy"].mean()), 1)
-    features = engineer_features(data)[FEATURES]
+        month = pd.to_numeric(payload.get("month"), errors="coerce")
+        if pd.isna(month):
+            return jsonify({"error": "Month must be a number between 1 and 12."}), 400
 
-    model = load_model()
-    classifier = model["classifier"]
-    regressor = model["regressor"]
-    level = classifier.predict(features)[0]
-    probabilities = classifier.predict_proba(features)[0]
-    confidence = round(float(max(probabilities)) * 100, 1)
-    estimated = int(regressor.predict(features)[0])
+        town = payload.get("town")
+        town_rows = dataset[dataset["town"] == town]
+        month_rows = town_rows[town_rows["month"] == month]
+        reference_rows = month_rows if not month_rows.empty else town_rows
+        if reference_rows.empty:
+            reference_rows = dataset
 
-    recommendation = {
-        "Low": "Demand is favorable. Recommend heritage walks, museums, and flexible booking.",
-        "Medium": "Demand is rising. Recommend early arrivals, pre-booked activities, and weekday mobility.",
-        "High": "High saturation expected. Recommend booking accommodation, transport, and attractions in advance.",
-    }[level]
+        def mode_or_default(column, default):
+            values = reference_rows[column].dropna()
+            if values.empty:
+                return default
+            return values.mode().iloc[0]
 
-    return jsonify(
-        {
-            "level": level,
-            "confidence": confidence,
-            "tourists": estimated,
-            "recommendation": recommendation,
-            "explanation": "Random Forest evaluated the synchronized dataset fields: town, season, holiday, weather, mobility, events, month, historical flow, hotel occupancy, and engineered pressure indicators.",
-            "reference_occupancy": float(data.loc[0, "occupancy"]),
-            "probabilities": {
-                label: round(float(prob) * 100, 1)
-                for label, prob in zip(classifier.classes_, probabilities)
-            },
+        def number_or_default(name, default):
+            value = pd.to_numeric(payload.get(name), errors="coerce")
+            return default if pd.isna(value) else float(value)
+
+        prediction_input = {
+            "town": town if town in set(dataset["town"]) else mode_or_default("town", dataset["town"].iloc[0]),
+            "season": payload.get("season") or mode_or_default("season", "Medium"),
+            "holiday": payload.get("holiday") or mode_or_default("holiday", "No"),
+            "weather": payload.get("weather") or mode_or_default("weather", "Mild"),
+            "mobility": payload.get("mobility") or mode_or_default("mobility", "Medium"),
+            "events": number_or_default("events", reference_rows["events"].median()),
+            "month": int(month),
+            "historical_tourists": number_or_default(
+                "historical_tourists", reference_rows["historical_tourists"].median()
+            ),
+            "occupancy": round(float(reference_rows["occupancy"].mean()), 1),
         }
-    )
+
+        data = pd.DataFrame([prediction_input])
+        features = engineer_features(data)[FEATURES]
+
+        model = load_model()
+        classifier = model["classifier"]
+        regressor = model["regressor"]
+        level = classifier.predict(features)[0]
+        probabilities = classifier.predict_proba(features)[0]
+        confidence = round(float(max(probabilities)) * 100, 1)
+        estimated = max(0, int(regressor.predict(features)[0]))
+
+        dataset_recommendation = mode_or_default("recommendation", "")
+        recommendation = dataset_recommendation or {
+            "Low": "Demand is favorable. Recommend heritage walks, museums, and flexible booking.",
+            "Medium": "Demand is rising. Recommend early arrivals, pre-booked activities, and weekday mobility.",
+            "High": "High saturation expected. Recommend booking accommodation, transport, and attractions in advance.",
+        }[level]
+
+        return jsonify(
+            {
+                "level": level,
+                "confidence": confidence,
+                "tourists": estimated,
+                "recommendation": recommendation,
+                "explanation": "Random Forest used the same normalized fields as the training dataset: town, season, holiday, weather, mobility, events, month, historical tourists, and hotel occupancy reference.",
+                "reference_occupancy": prediction_input["occupancy"],
+                "input": prediction_input,
+                "probabilities": {
+                    label: round(float(prob) * 100, 1)
+                    for label, prob in zip(classifier.classes_, probabilities)
+                },
+            }
+        )
+    except Exception as error:
+        return jsonify({"error": f"Prediction failed: {error}"}), 500
 
 
 if __name__ == "__main__":
