@@ -1,6 +1,7 @@
 from pathlib import Path
 import joblib
 import pandas as pd
+import sklearn
 from flask import Flask, jsonify, render_template, request
 from model.training import FEATURES, engineer_features, normalize_tourism_data, train_model
 
@@ -171,7 +172,16 @@ def load_model():
     )
     if model_is_stale:
         train_model(DATA_PATH, MODEL_PATH)
-    return joblib.load(MODEL_PATH)
+
+    try:
+        model = joblib.load(MODEL_PATH)
+        if model.get("sklearn_version") != sklearn.__version__:
+            train_model(DATA_PATH, MODEL_PATH)
+            model = joblib.load(MODEL_PATH)
+        return model
+    except Exception:
+        train_model(DATA_PATH, MODEL_PATH)
+        return joblib.load(MODEL_PATH)
 
 
 def latest_town_records():

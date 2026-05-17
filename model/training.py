@@ -1,6 +1,7 @@
 from pathlib import Path
 import joblib
 import pandas as pd
+import sklearn
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
@@ -190,6 +191,7 @@ def train_model(data_path=None, model_path=None):
             "regressor": regressor,
             "metrics": metrics,
             "features": FEATURES,
+            "sklearn_version": sklearn.__version__,
         },
         model_path,
     )
